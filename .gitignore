@@ -1,5 +1,51 @@
-**/Debug/
-**/*.launch
-.metadata
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Compiled binaries and debug files
+*.bin
+*.elf
+*.hex
+*.map
+*.lst
+*.suo
+*.user
+
+# Eclipse/STM32CubeIDE workfiles and settings
+.settings/
+Debug/
+Release/
+.cproject
+.project
+.metadata/
+*.launch
+*.jflash
+build/
+[Bb]in/
+[Oo]bj/
+
+# CooCox workfiles (if used)
+*.cogui
+*.comarker
+*.coproj
+*.comemgui
+
+# Backup and temporary files
+*~
+*.bak
+*.tmp
+
 **/.DS_Store
 **/*.osx.project
