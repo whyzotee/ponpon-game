@@ -66,45 +66,17 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for BlinkLD1 */
-osThreadId_t BlinkLD1Handle;
-const osThreadAttr_t BlinkLD1_attributes = {
-  .name = "BlinkLD1",
+/* Definitions for TouchDisplayTas */
+osThreadId_t TouchDisplayTasHandle;
+const osThreadAttr_t TouchDisplayTas_attributes = {
+  .name = "TouchDisplayTas",
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
-/* Definitions for BlinkLD2 */
-osThreadId_t BlinkLD2Handle;
-const osThreadAttr_t BlinkLD2_attributes = {
-  .name = "BlinkLD2",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for BlinkLD3 */
-osThreadId_t BlinkLD3Handle;
-const osThreadAttr_t BlinkLD3_attributes = {
-  .name = "BlinkLD3",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for UARTTask1 */
-osThreadId_t UARTTask1Handle;
-const osThreadAttr_t UARTTask1_attributes = {
-  .name = "UARTTask1",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for UARTTask2 */
-osThreadId_t UARTTask2Handle;
-const osThreadAttr_t UARTTask2_attributes = {
-  .name = "UARTTask2",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
-/* Definitions for DisplayTask */
-osThreadId_t DisplayTaskHandle;
-const osThreadAttr_t DisplayTask_attributes = {
-  .name = "DisplayTask",
+/* Definitions for DisplayMenuTask */
+osThreadId_t DisplayMenuTaskHandle;
+const osThreadAttr_t DisplayMenuTask_attributes = {
+  .name = "DisplayMenuTask",
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
@@ -115,10 +87,7 @@ const osThreadAttr_t DisplayTask_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
-void LEDTask1(void *argument);
-void LEDTask2(void *argument);
-void LEDTask3(void *argument);
-void UARTTask(void *argument);
+void DisplayTouch(void *argument);
 void DisplayLCD(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -153,23 +122,11 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* creation of BlinkLD1 */
-  BlinkLD1Handle = osThreadNew(LEDTask1, NULL, &BlinkLD1_attributes);
+  /* creation of TouchDisplayTas */
+  TouchDisplayTasHandle = osThreadNew(DisplayTouch, NULL, &TouchDisplayTas_attributes);
 
-  /* creation of BlinkLD2 */
-  BlinkLD2Handle = osThreadNew(LEDTask2, NULL, &BlinkLD2_attributes);
-
-  /* creation of BlinkLD3 */
-  BlinkLD3Handle = osThreadNew(LEDTask3, NULL, &BlinkLD3_attributes);
-
-  /* creation of UARTTask1 */
-  UARTTask1Handle = osThreadNew(UARTTask, (void*) one, &UARTTask1_attributes);
-
-  /* creation of UARTTask2 */
-  UARTTask2Handle = osThreadNew(UARTTask, (void*) two, &UARTTask2_attributes);
-
-  /* creation of DisplayTask */
-  DisplayTaskHandle = osThreadNew(DisplayLCD, NULL, &DisplayTask_attributes);
+  /* creation of DisplayMenuTask */
+  DisplayMenuTaskHandle = osThreadNew(DisplayLCD, NULL, &DisplayMenuTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -199,16 +156,16 @@ void StartDefaultTask(void *argument)
   /* USER CODE END StartDefaultTask */
 }
 
-/* USER CODE BEGIN Header_LEDTask1 */
+/* USER CODE BEGIN Header_DisplayTouch */
 /**
-* @brief Function implementing the BlinkLD1 thread.
+* @brief Function implementing the TouchDisplayTas thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_LEDTask1 */
-void LEDTask1(void *argument)
+/* USER CODE END Header_DisplayTouch */
+void DisplayTouch(void *argument)
 {
-  /* USER CODE BEGIN LEDTask1 */
+  /* USER CODE BEGIN DisplayTouch */
   /* Infinite loop */
   for(;;)
   {
@@ -221,66 +178,12 @@ void LEDTask1(void *argument)
 		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 0);
 	  }
   }
-  /* USER CODE END LEDTask1 */
-}
-
-/* USER CODE BEGIN Header_LEDTask2 */
-/**
-* @brief Function implementing the BlinkLD2 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_LEDTask2 */
-void LEDTask2(void *argument)
-{
-  /* USER CODE BEGIN LEDTask2 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END LEDTask2 */
-}
-
-/* USER CODE BEGIN Header_LEDTask3 */
-/**
-* @brief Function implementing the BlinkLD3 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_LEDTask3 */
-void LEDTask3(void *argument)
-{
-  /* USER CODE BEGIN LEDTask3 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END LEDTask3 */
-}
-
-/* USER CODE BEGIN Header_UARTTask */
-/**
-* @brief Function implementing the UARTTask1 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_UARTTask */
-void UARTTask(void *argument)
-{
-  /* USER CODE BEGIN UARTTask */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END UARTTask */
+  /* USER CODE END DisplayTouch */
 }
 
 /* USER CODE BEGIN Header_DisplayLCD */
 /**
-* @brief Function implementing the DisplayTask thread.
+* @brief Function implementing the DisplayMenuTask thread.
 * @param argument: Not used
 * @retval None
 */
