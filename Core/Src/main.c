@@ -26,6 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "string.h"
 #include "ILI9341_STM32_Driver.h"
 /* USER CODE END Includes */
 
@@ -103,8 +104,10 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_USART3_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Transmit(&huart3, (uint8_t*) "OK", 2, 100);
+  char init_msg[] = "Kernel Boosting...";
+  HAL_UART_Transmit(&huart3, (uint8_t*) init_msg, strlen(init_msg), 100);
 
   ILI9341_Init();
   ILI9341_Set_Rotation(SCREEN_HORIZONTAL_2);
@@ -129,6 +132,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	char error_msg[] = "Exception Kernel Error!";
+	HAL_UART_Transmit(&huart3, (uint8_t*) error_msg, strlen(error_msg), 100);
   }
   /* USER CODE END 3 */
 }

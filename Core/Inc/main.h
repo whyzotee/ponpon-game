@@ -71,6 +71,18 @@ void Error_Handler(void);
 #define BLUE_BTN_GPIO_Port GPIOC
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
+#define C_Left_Pin GPIO_PIN_10
+#define C_Left_GPIO_Port GPIOE
+#define C_Right_Pin GPIO_PIN_12
+#define C_Right_GPIO_Port GPIOE
+#define C_Boost_Pin GPIO_PIN_14
+#define C_Boost_GPIO_Port GPIOE
+#define C_Shoot_Pin GPIO_PIN_15
+#define C_Shoot_GPIO_Port GPIOE
+#define L_Left_Pin GPIO_PIN_10
+#define L_Left_GPIO_Port GPIOB
+#define L_Right_Pin GPIO_PIN_11
+#define L_Right_GPIO_Port GPIOB
 #define LD3_Pin GPIO_PIN_14
 #define LD3_GPIO_Port GPIOB
 #define CS_Pin GPIO_PIN_8
@@ -79,6 +91,14 @@ void Error_Handler(void);
 #define DC_GPIO_Port GPIOC
 #define RST_Pin GPIO_PIN_10
 #define RST_GPIO_Port GPIOC
+#define S_IN_4_Pin GPIO_PIN_4
+#define S_IN_4_GPIO_Port GPIOD
+#define S_IN_3_Pin GPIO_PIN_5
+#define S_IN_3_GPIO_Port GPIOD
+#define S_IN_2_Pin GPIO_PIN_6
+#define S_IN_2_GPIO_Port GPIOD
+#define S_IN_1_Pin GPIO_PIN_7
+#define S_IN_1_GPIO_Port GPIOD
 #define LD2_Pin GPIO_PIN_7
 #define LD2_GPIO_Port GPIOB
 
